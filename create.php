@@ -16,8 +16,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
      $back_msg = "<br> Please enter text for the back of your flashcard!";
 
   if ($front != NULL && $back != NULL){
-    $front = $back = NULL;
-    $front_msg = $back_msg = NULL;
     //add card to database
   }
 }
@@ -93,18 +91,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
         <tr>
           <td colspan=2 align="center">
-          <input type="submit" value="Next Card" class="btn btn-secondary" />
+          <input type="reset" value="Done with Deck" class="btn btn-secondary" onclick='submitDeck();'/>
+          <input type="submit" value="Next Card" class="btn btn-secondary"/>
           </td>
         </tr>
 
       </table>
   </form>
 
-  <div class="created-cards" align="center">
-    <p id="new-card"></p>
-  </div>
-
+  <div id="created-cards" align="center"></div>
 
  </body>
+
+
+ <script>
+
+   function submitDeck()
+   {
+      document.getElementById("created-cards").innerHTML = "New deck successfully created!";
+   }
+
+ </script>
 
 </html>

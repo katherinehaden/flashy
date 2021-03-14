@@ -31,8 +31,6 @@ function study(){
   document.getElementById("card-area").innerHTML =
     "<div id='current-card' class='card' onclick='flip();'>" + deck[currentCard][cardSide] + "</i></div>" +
     "<button id='review-star' class='star' onclick='mark_for_review();' style='color:" + color + "'><i class='fas fa-star fa-1x'></i></button>";
-  //document.getElementById("current-card").innerHTML =
-  //"<div id='review-star' class='star'><i class='fas fa-star'></i></div>";
 }
 
 //called when the user clicks the card area
@@ -47,11 +45,14 @@ function flip(){
   }
 }
 
+//helper ARROW FUNCTION to increment/decrement varibles
+update = (a, b) => a+b;
+
 //called when user clicks the next button
 function next(){
   cardSide = 0; //always want to start on front
   if(currentCard+1 < deck.length){
-    currentCard++;
+    currentCard = update(currentCard, 1);
     study();
   }
 }
@@ -60,7 +61,7 @@ function next(){
 function previous(){
   cardSide = 0; //always want to start on front
   if(currentCard-1 > -1){
-    currentCard--;
+    currentCard = update(currentCard, -1);
     study();
   }
 }
