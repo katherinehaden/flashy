@@ -1,41 +1,43 @@
-<!-- /***************************************************************************************
-*  REFERENCES
-*  The skeleton for this was based off of work done in na previous class
+<?php
+$front = $back = NULL;
+$front_msg = $back_msg = NULL;
 
-https://www.w3schools.com/css/css_navbar.asp
-https://getbootstrap.com/docs/4.0/components/navbar/
-nav bar stuff
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+{
 
-https://stackoverflow.com/questions/22383547/bootstrap-dropdown-menu-is-not-working
+  if(!empty($_POST['front']))
+     $front = $_POST['front'];
+  else
+     $front_msg = "<br> Please enter text for the front of your flashcard!";
 
-For when adding php
-https://www.google.com/search?sxsrf=ALeKk00IKHsuInB6gCV6iWMNt85tFfLnGw%3A1615310521280&ei=ua5HYNStEKGt5NoPrJyTsAI&q=
-how+to+have+navigation+bar+in+html+on+every+page&oq=how+to+have+navigation+bar+in+html+on+every+page&gs_lcp=Cgdnd3Mt
-d2l6EAMyCAghEBYQHRAeOgcIABBHELADOgYIABAWEB46BQghEKABOgUIIRCrAlDWGliIL2CXMGgBcAJ4AIABsQeIAbwekgENMS4zLjQuMC4xLjIuMZgBAKABAaoB
-B2d3cy13aXrIAQjAAQE&sclient=gws-wiz&ved=0ahUKEwiU7snO3KPvAhWhFlkFHSzOBCYQ4dUDCA0&uact=5#kpvalbx=_wK5HYMiyL46l5NoP6uuxyAU27
+  if(!empty($_POST['back']))
+     $back = $_POST['back'];
+  else
+     $back_msg = "<br> Please enter text for the back of your flashcard!";
 
-*
-*  Title: Bootstrap 3 Tutorial
-*  Author: W3 Schools
-*  Date: 10/20/20
-*  Code version: v1.0.0
-*  URL: https://www.w3schools.com/bootstrap/
-*  Software License: Fair Use
+  if ($front != NULL && $back != NULL){
+    $front = $back = NULL;
+    $front_msg = $back_msg = NULL;
+    //add card to database
+  }
+}
+?>
 
-***************************************************************************************/ -->
 
 <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">  <!-- required to handle IE -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link href="flashy-css.css" rel="stylesheet" type="text/css"/>
   </head>
 <body>
 
-      <nav class="navbar navbar-expand-md bg-light navbar-dark">
-        <a class="navbar-brand" href="#">Flashy</a>
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <a class="navbar-brand" href="main.html">Flashy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,7 +47,7 @@ B2d3cy13aXrIAQjAAQE&sclient=gws-wiz&ved=0ahUKEwiU7snO3KPvAhWhFlkFHSzOBCYQ4dUDCA0
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Decks</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="create.php">Create</a>
+                <a class="dropdown-item" href="create.html">Create</a>
                 <a class="dropdown-item" href="study.html">Study</a>
              </div>
             </li>
@@ -65,5 +67,44 @@ B2d3cy13aXrIAQjAAQE&sclient=gws-wiz&ved=0ahUKEwiU7snO3KPvAhWhFlkFHSzOBCYQ4dUDCA0
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-</body>
+
+   <h1 align="center">
+     New Flashcard Deck
+   </h1>
+
+
+  <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+      <table class="table table-borderless">
+        <tr>
+          <td width="45%" align="right"><label>Front: </label></td>
+          <td>
+            <input type="text" name="front" value="<?php if (!empty($_POST['front'])) echo $_POST['front'] ?>" autofocus />
+              <span class='msg'> <?php if (empty($_POST['front'])) echo $front_msg ?> </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td width="45%" align="right"><label>Back:</label></td>
+          <td>
+            <input type="text" name="back" value="<?php if (!empty($_POST['back'])) echo $_POST['back'] ?>"/>
+              <span class='msg'><?php if (empty($_POST['back'])) echo $back_msg ?></span>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan=2 align="center">
+          <input type="submit" value="Next Card" class="btn btn-secondary" />
+          </td>
+        </tr>
+
+      </table>
+  </form>
+
+  <div class="created-cards" align="center">
+    <p id="new-card"></p>
+  </div>
+
+
+ </body>
+
 </html>
