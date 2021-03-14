@@ -38,3 +38,17 @@ color: White;
 }
 
 
+#login-page {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#username-show{
+    text-align:center;
+    font-family:Georgia, serif;
+}
+
+.feedback{
+    font-style: italic;
+    color: red;
+}
