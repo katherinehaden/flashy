@@ -1,28 +1,27 @@
+<!-----PHP for later
 <?php
-$front = $back = NULL;
-$front_msg = $back_msg = NULL;
+  $front = $back = NULL;
+  $front_msg = $back_msg = NULL;
 
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-{
+  if($_SERVER['REQUEST_METHOD'] == 'POST')
+  {
+    if(!empty($_POST['front']))
+      $front = $_POST['front'];
+    else
+      $front_msg = "<br> Please enter text for the front of your flashcard!";
 
-  if(!empty($_POST['front']))
-     $front = $_POST['front'];
-  else
-     $front_msg = "<br> Please enter text for the front of your flashcard!";
+    if(!empty($_POST['back']))
+      $back = $_POST['back'];
+    else
+      $back_msg = "<br> Please enter text for the back of your flashcard!";
 
-  if(!empty($_POST['back']))
-     $back = $_POST['back'];
-  else
-     $back_msg = "<br> Please enter text for the back of your flashcard!";
-
-  if ($front != NULL && $back != NULL){
-    //add card to database
+    if ($front != NULL && $back != NULL){
+      //add card to database
+    }
   }
-}
-?>
+?> ------>
 
 
-<!DOCTYPE html>
  <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -70,7 +69,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
      New Flashcard Deck
    </h1>
 
-
+<!---- PHP version of form
   <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
       <table class="table table-borderless">
         <tr>
@@ -92,14 +91,52 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         <tr>
           <td colspan=2 align="center">
           <input type="reset" value="Done with Deck" class="btn btn-secondary" onclick='submitDeck();'/>
-          <input type="submit" value="Next Card" class="btn btn-secondary"/>
+          <input type="submit" value="Next Card" class="btn btn-secondary" onclick='submitCard();'/>
+          </td>
+        </tr>
+      </table>
+
+  </form> ----->
+
+<!-- JS version of form for assignment 2 -->
+      <form>
+      <table class="table table-borderless">
+        <tr>
+          <td width="45%" align="right"><label>Front: </label></td>
+          <td>
+            <input type="text" id="front" autofocus />
+            <span id='front_msg'></span>
           </td>
         </tr>
 
+        <tr>
+          <td width="45%" align="right"><label>Back:</label></td>
+          <td>
+            <input type="text" id="back"/>
+            <span id='back_msg'></span>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan=2 align="center">
+          <input type="reset" value="Done with Deck" class="btn btn-secondary" onclick='submitDeck();'/>
+          <input type="reset" value="Next Card" class="btn btn-secondary" onclick='checkCard();'/>
+          </td>
+        </tr>
       </table>
+
   </form>
 
-  <div id="created-cards" align="center"></div>
+      <table id="added-cards" align="center">
+      <tr> <td>Added Cards</td> </tr>
+      <tr>
+        <th>Front</th>
+        <th>Back</th>
+      </tr>
+
+    </table>
+
+  <div id="created-deck" align="center"><br></div>
 
  </body>
 
@@ -108,7 +145,37 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
    function submitDeck()
    {
-      document.getElementById("created-cards").innerHTML = "New deck successfully created!";
+      document.getElementById("created-deck").innerHTML = "New deck successfully created!";
+   }
+
+   function checkCard()
+   {
+     document.getElementById("front_msg").innerHTML = "";
+     document.getElementById("back_msg").innerHTML = "";
+
+     if(document.getElementById("front").value.length <= 0){
+       document.getElementById("front_msg").innerHTML = "Oh no! Add a front.";
+     }
+     if(document.getElementById("back").value.length <= 0){
+       document.getElementById("back_msg").innerHTML = "Oh no! Add a back.";
+     }
+     if(document.getElementById("front").value.length > 0 && document.getElementById("back").value.length > 0){
+       submitCard();
+     }
+
+   }
+
+   function submitCard(c)
+   {
+      var table = document.getElementById("added-cards");
+      var row = table.insertRow(table.length);
+      var front = row.insertCell(0);
+      var back = row.insertCell(1);
+
+      //https://www.tutorialrepublic.com/faq/how-to-get-the-value-of-text-input-field-using-javascript.php
+      //used to know how to get a value from a test input from a form
+      front.innerHTML = document.getElementById("front").value;
+      back.innerHTML = document.getElementById("back").value;
    }
 
  </script>

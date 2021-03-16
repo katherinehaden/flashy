@@ -1,3 +1,7 @@
+// referenced the following tutorial for logic concepts,
+// implemented them using my own javascript
+// http://www.flashbynight.com/tutes/flashcards/
+
 var cardSide=0; //0 means on card front, 1 on card back
 var currentCard=0; //index of current card
 var deck = []; //will hold all the cards in the deck
