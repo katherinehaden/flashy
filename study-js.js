@@ -1,4 +1,5 @@
-// referenced the following tutorial for logic concepts,
+// Katherine Johnson
+//referenced the following tutorial for logic concepts,
 // implemented them using my own javascript
 // http://www.flashbynight.com/tutes/flashcards/
 
