@@ -41,7 +41,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         </button>
 
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav w-100">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Decks</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
