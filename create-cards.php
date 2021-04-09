@@ -44,7 +44,13 @@
 <?php session_start(); ?>
 
 <div class="container">
-    <h1>Let's add cards to <?php echo $_SESSION['new-deck-name'] ?>! </h1>
+    <?php if(isset($_SESSION['new-deck-name'])){
+        echo "<h1> Let's add cards to <span style='color:rebeccapurple'>" . $_SESSION['new-deck-name'] . "</span></h1>";
+    }
+    else {
+        echo "<h1>OH no! This deck has no name. Please go back a page and add one. </h1>";
+    }?>
+    
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
         Front of Card: <input type="text" name="front" class="form-control" autofocus required /> <br/>
         Back of Card: <input type="text" name="back" class="form-control" required /> <br/>

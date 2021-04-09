@@ -46,21 +46,45 @@
 <div class="container">
     <h1> Your new deck has been added! </h1>
     <?php
-        echo "<h2 style='text-align: center;'>" . $_SESSION['new-deck-name'] . "</h2>";
+        echo "<h2 style='text-align: center;'>";
+        if (isset($_SESSION['new-deck-name'])) echo $_SESSION['new-deck-name'];
+        echo "</h2>";
 
         echo "<div class='card-columns'>";
-
-            foreach ($_SESSION['new-deck-cards'] as $front => $back) {
-                echo "<div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
+            if(isset($_SESSION['new-deck-cards']))
+            {
+                foreach ($_SESSION['new-deck-cards'] as $front => $back) {
+                    echo "<div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
                         <div class='card-header'>" . $front . "</div>
                         <div class='card-body'>" . $back . "</div>
                     </div>";
+                }
             }
             ?>
         </div>
 </div>
 
+<!---- TO DO: insert deck into database!!! --->
 
+<?php
+//clearing the session elements...
+if(isset($_SESSION['new-deck-name']))
+{
+    unset($_SESSION['new-deck-name']);
+}
+if(isset($_SESSION['new-deck-cards']))
+{
+    unset($_SESSION['new-deck-cards']);
+}
+if(isset($_SESSION['last-front-added']))
+{
+    unset($_SESSION['last-front-added']);
+}
+if(isset($_SESSION['last-back-added']))
+{
+    unset($_SESSION['last-back-added']);
+}
+?>
 
 </body>
 
