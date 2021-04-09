@@ -48,9 +48,28 @@
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
         Front of Card: <input type="text" name="front" class="form-control" autofocus required /> <br/>
         Back of Card: <input type="text" name="back" class="form-control" required /> <br/>
-        <input type="submit" name = "card-done" value="Add next card" class="btn btn-light" />
-        <input type="submit" name = "deck-done" value="That's the last one!" class="btn btn-light" />
+        <input type="submit" name = "card-done" value="Add Card" class="btn btn-light" />
     </form>
+
+    <br>
+
+    <!---- referenced https://getbootstrap.com/docs/4.4/components/card/ --->
+
+    <?php
+    if(isset($_SESSION['last-front-added']) && isset($_SESSION['last-back-added']))
+    {
+        echo "Previous Card Added...";
+        echo "<div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
+                            <div class='card-header'>" . $_SESSION['last-front-added'] . "</div>
+                            <div class='card-body'>" . $_SESSION['last-back-added'] . "</div>
+                        </div>";
+    }
+    ?>
+
+    <a href="create-confirmation.php">
+        <button class="btn btn-light">Finalize my Deck!</button>
+    </a>
+
 </div>
 
 <?php
@@ -62,37 +81,14 @@
             $_SESSION['new-deck-cards'] = array(); //an array to hold the new cards
         }
         $_SESSION['new-deck-cards'][$_POST['front']] = $_POST['back'];
+        $_SESSION['last-front-added'] = $_POST['front'];
+        $_SESSION['last-back-added'] = $_POST['back'];
         header('Location: create-cards.php');
-    }
-    else if(isset($_POST['deck-done']))
-    {
-        if(!isset($_SESSION['new-deck-cards']))
-        {
-            $_SESSION['new-deck-cards'] = array(); //an array to hold the new cards
-        }
-        $_SESSION['new-deck-cards'][$_POST['front']] = $_POST['back'];
-
-        //put the deck in the database somehow!!!
-        header('Location: deck-created.php');
     }
 
 ?>
 
 </body>
-
-
-<br/>
-So far, $_SESSION(<?php echo session_id() ?>) contains... <br/>
-<?php
-if(isset($_SESSION['cards']))
-{
-    foreach($_SESSION['cards'] as $k => $v)
-    {
-        echo "$k : $v <br/>";
-    }
-}
-?>
-<br/>
 
 
 </html>

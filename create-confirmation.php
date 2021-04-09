@@ -46,27 +46,22 @@
 <div class="container">
     <h1> Your new deck has been added! </h1>
     <?php
-        echo "<h2>" . $_SESSION['new-deck-name'] . "</h2>";
-        // referenced... https://stackoverflow.com/questions/14047296/display-array-as-a-table
-        echo "<table style='font-size:1.5rem;' border='1'>";
-        echo "<tr><th> Front </th> <th> Back </th> </tr>";
-        foreach ($_SESSION['new-deck-cards'] as $front => $back) {
-            echo "<tr><td>" . $front . "</td>" . "<td>" . $back . "</td></tr>";
+        echo "<h2 style='text-align: center;'>" . $_SESSION['new-deck-name'] . "</h2>";
 
-        }
-        ?>
+        echo "<div class='card-columns'>";
 
+            foreach ($_SESSION['new-deck-cards'] as $front => $back) {
+                echo "<div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
+                        <div class='card-header'>" . $front . "</div>
+                        <div class='card-body'>" . $back . "</div>
+                    </div>";
+            }
+            ?>
+        </div>
 </div>
 
 
-</body>
 
-<?php
-if(count($_SESSION) > 0)
-{
-    unset($_SESSION['new-deck-name']);
-    unset($_SESSION['new-deck-cards']);
-}
-?>
+</body>
 
 </html>
