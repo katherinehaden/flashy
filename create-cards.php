@@ -50,7 +50,7 @@
     else {
         echo "<h1>OH no! This deck has no name. Please go back a page and add one. </h1>";
     }?>
-    
+
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
         Front of Card: <input type="text" name="front" class="form-control" autofocus required /> <br/>
         Back of Card: <input type="text" name="back" class="form-control" required /> <br/>

@@ -41,54 +41,25 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <!--End of nav bar-->
 
-<?php session_start(); ?>
-
 <div class="container">
-    <h1> Your new deck has been added! </h1>
-    <?php
-        echo "<h2 style='text-align: center;'>";
-        if (isset($_SESSION['new-deck-name'])) echo $_SESSION['new-deck-name'];
-        echo "</h2>";
-
-        //referenced https://getbootstrap.com/docs/4.4/components/card/
-
-        echo "<div class='card-columns'>";
-            if(isset($_SESSION['new-deck-cards']))
-            {
-                foreach ($_SESSION['new-deck-cards'] as $front => $back) {
-                    echo "<div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
-                        <div class='card-header'>" . $front . "</div>
-                        <div class='card-body'>" . $back . "</div>
-                    </div>";
-                }
-            }
-            ?>
-        </div>
-
-    <h2> Would you like to <a href="study-main.php">study</a> now?</h2>
+<h1> What would you like to study?</h1>
+    <!---- referenced https://getbootstrap.com/docs/4.4/components/card/ --->
+    <br>
+    <!--- TO DO: for each deck in the database attached to this user... ---->
+    <div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
+        <!-- set a session variable to be the name of the deck when clicked??
+                so the study page knows what data to load... --->
+        <a href="study.html" class="btn btn-light" style="background-color:cadetblue">Name of Deck</a>
+    </div>
+    <div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
+        <a href="study.html" class="btn btn-light" style="background-color:cadetblue">Name of Deck #2</a>
+    </div>
+    <div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
+        <a href="study.html" class="btn btn-light" style="background-color:cadetblue">Name of a third deck</a>
+    </div>
 </div>
 
-<!---- TO DO: insert deck into database!!! --->
 
-<?php
-//clearing the session elements...
-if(isset($_SESSION['new-deck-name']))
-{
-    unset($_SESSION['new-deck-name']);
-}
-if(isset($_SESSION['new-deck-cards']))
-{
-    unset($_SESSION['new-deck-cards']);
-}
-if(isset($_SESSION['last-front-added']))
-{
-    unset($_SESSION['last-front-added']);
-}
-if(isset($_SESSION['last-back-added']))
-{
-    unset($_SESSION['last-back-added']);
-}
-?>
 
 </body>
 
