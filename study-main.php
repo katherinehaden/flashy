@@ -1,3 +1,5 @@
+<?php require('connect-db.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,26 +43,74 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <!--End of nav bar-->
 
+<?php session_start(); ?>
+
 <div class="container">
 <h1> What would you like to study?</h1>
     <!---- referenced https://getbootstrap.com/docs/4.4/components/card/ --->
     <br>
-    <!--- TO DO: for each deck in the database attached to this user... ---->
-    <div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
-        <!-- set a session variable to be the name of the deck when clicked??
-                so the study page knows what data to load... --->
-        <a href="study.html" class="btn btn-light" style="background-color:cadetblue">Name of Deck</a>
-    </div>
-    <div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
-        <a href="study.html" class="btn btn-light" style="background-color:cadetblue">Name of Deck #2</a>
-    </div>
-    <div class='card text-white bg-info mb-3' style='max-width: 18rem;'>
-        <a href="study.html" class="btn btn-light" style="background-color:cadetblue">Name of a third deck</a>
-    </div>
+
+    <?php
+
+    function getMyDecks()
+    {
+        global $db;
+
+        // WILL BE DELETED ONCE MAIN PAGE AND LOGIN IN ARE DONE!!
+        if(!isset($_SESSION['username']))
+        {
+            $_SESSION['username'] = "test_user";
+        }
+        // !!!
+
+        //should probably be checking that all of these are set... ?
+        $username = $_SESSION['username'];
+
+        $query = "SELECT deck.deck_title FROM deck WHERE deck.username = :u";
+
+        $statement = $db->prepare($query);
+
+        $statement->bindValue(':u', $username);
+
+        $statement->execute();
+
+        $_SESSION['my-decks'] = $statement->fetchAll();
+
+        $statement->closeCursor();
+
+    }
+
+    if(isset($_SESSION['my-decks']))
+    {
+        unset($_SESSION['my-decks']);
+    }
+
+    getMyDecks();
+
+    ?>
+
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="get">
+    <?php
+    foreach($_SESSION['my-decks'] as $i => $result)
+    {
+        echo "<div class='card text-white bg-info mb-3' style='max-width: 18rem;'>";
+        echo "<button class='btn btn-light' name='study-this-deck' ";
+        echo "value= '" . $result['deck_title'] . "' >";
+        echo $result['deck_title'];
+        echo "</button></div>";
+    }
+    ?>
+    </form>
+
+    <?php
+        if(isset($_GET['study-this-deck']))
+        {
+            setcookie('study-deck', $_GET['study-this-deck'], time()+3600);
+            Header('Location: study.php');
+        }
+    ?>
+
 </div>
-
-
-
 </body>
 
 </html>

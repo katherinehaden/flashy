@@ -1,3 +1,5 @@
+<?php require('connect-db.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,6 +81,40 @@
 </div>
 
 <?php
+    function insertCard()
+    {
+        global $db;
+
+        // WILL BE DELETED ONCE MAIN PAGE AND LOGIN IN ARE DONE!!
+        if(!isset($_SESSION['username']))
+        {
+            $_SESSION['username'] = "test_user";
+        }
+        // !!!
+
+        //should probably be checking that all of these are set... ?
+        $username = $_SESSION['username'];
+        $deck_title = $_SESSION['new-deck-name'];
+        //card_id (will increment automatically)
+        $front = $_SESSION['last-front-added'];
+        $back = $_SESSION['last-back-added'];
+        $review = 0;
+
+        $query = "INSERT INTO card (username, deck_title, front, back, review)
+                    VALUES(:u, :dt, :f, :b, :r)";
+
+        $statement = $db->prepare($query);
+
+        $statement->bindValue(':u', $username);
+        $statement->bindValue(':dt', $deck_title);
+        $statement->bindValue(':f', $front);
+        $statement->bindValue(':b', $back);
+        $statement->bindValue(':r', $review);
+
+        $statement->execute();
+        $statement->closeCursor();
+
+    }
 
     if(isset($_POST['card-done']))
     {
@@ -89,9 +125,9 @@
         $_SESSION['new-deck-cards'][$_POST['front']] = $_POST['back'];
         $_SESSION['last-front-added'] = $_POST['front'];
         $_SESSION['last-back-added'] = $_POST['back'];
+        insertCard();
         header('Location: create-cards.php');
     }
-
 ?>
 
 </body>

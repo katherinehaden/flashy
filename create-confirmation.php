@@ -68,8 +68,6 @@
     <h2> Would you like to <a href="study-main.php">study</a> now?</h2>
 </div>
 
-<!---- TO DO: insert deck into database!!! --->
-
 <?php
 //clearing the session elements...
 if(isset($_SESSION['new-deck-name']))
@@ -89,6 +87,7 @@ if(isset($_SESSION['last-back-added']))
     unset($_SESSION['last-back-added']);
 }
 ?>
+
 
 </body>
 
