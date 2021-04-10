@@ -10,39 +10,7 @@
     <link href="style/flashy-css.css" rel="stylesheet" type="text/css"/>
   </head>
 <body>
-<!-- Beginning of nav bar (will be replaced with php include for next assignment) -->
-      <nav class="navbar navbar-expand-lg navbar-dark justify-content-between">
-        <a class="navbar-brand" href="main.html">Flashy</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-          <ul class="navbar-nav w-100"><!-- looked up bootstrap width to rearrange navbar elements-->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Decks</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="create.html">Create</a>
-                <a class="dropdown-item" href="study.html">Study</a>
-             </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games        </a>
-              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#">Matching Mania</a>
-                <a class="dropdown-item" href="#">Jeopardy</a>
-             </div>
-            </li>
-
-
-          </ul>
-        </div>
-      </nav>
-<!-- got scripts from example navbar from class -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-<!-- End of nav bar -->
+<?php include('header.html')?>
 
 <head>
   <meta charset="utf-8">
@@ -78,7 +46,7 @@
 
 <script>
 
-<!-- used some in class ecamples like bind-event-with-param-->
+//<!-- used some in class ecamples like bind-event-with-param-->
    var email = document.getElementById("eml");
 
    function checkEmail() {
@@ -91,7 +59,7 @@
          msg1.textContent =  "Email must include @";
    }
 
-   <!-- Anonymous function used as parameter here -->
+   //<!-- Anonymous function used as parameter here -->
    email.addEventListener('blur', function() {
          checkEmail();
       }, false);
@@ -101,8 +69,8 @@
         document.getElementById("username-show").innerHTML = "<h1>Hi " + user.value + ", welcome to Flashy!</h1>";
         return false;
 
-<!-- I got this code from https://www.codexpedia.com/javascript/submitting-html-form-without-reload-the-page/#:~:text=Use%20jQuery's%20submit%20event%20to,prevent%20the%20page%20to%20reload. -->
-<!-- It is so that the form does not reload and so the username can still be used -->
+//<!-- I got this code from https://www.codexpedia.com/javascript/submitting-html-form-without-reload-the-page/#:~:text=Use%20jQuery's%20submit%20event%20to,prevent%20the%20page%20to%20reload. -->
+//<!-- It is so that the form does not reload and so the username can still be used -->
    $(document).ready(function() {
     $(document).on('submit', '#my-form', function() {
       return false;
