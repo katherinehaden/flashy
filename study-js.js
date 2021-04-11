@@ -3,20 +3,27 @@
 // implemented them using my own javascript
 // http://www.flashbynight.com/tutes/flashcards/
 
+
 var cardSide=0; //0 means on card front, 1 on card back
 var currentCard=0; //index of current card
 var deck = []; //will hold all the cards in the deck
 var color; //color of the mark for review star
 
+//loads deck info from the json file
+function loadDeck(){
+  $.getJSON("study-deck.json", function(data) {
+    for(i=0;i<data.study-deck.length;i++){
+      deck[i]=[];
+      deck[i][0]=data.study-deck[i].front;
+      deck[i][1]=data.study-deck[i].back;
+      deck[i][2]=data.study-deck[i].review;
+    }
+  })
+}
 // loads data into the deck variable,
 // then starts the study session
 function load_data_and_start(){
-  //first card, front is deck[0][0] and back is deck[0][1], deck[0][2] is whether or not
-  //card has been marked for review
-  deck.push(["What is the capital of North Carolina?","Raleigh", false]);
-  deck.push(["What's the capital of Colorado?","Denver", false]);
-  deck.push(["Hello","Goodbye", false]);
-  deck.push(["What's going on?","???", false]);
+  loadDeck();
   study();
 }
 

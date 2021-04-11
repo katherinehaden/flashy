@@ -8,9 +8,7 @@
  </head>
 
 <?php session_start(); ?>
-
-<?php
-if(isset($_COOKIE['study-deck']))
+<?php if(isset($_COOKIE['study-deck']))
 {
     global $db;
 
@@ -32,30 +30,15 @@ if(isset($_COOKIE['study-deck']))
     $statement->bindValue(':u', $username);
     $statement->bindValue(':dt', $deck_title);
     $statement->execute();
-    $_SESSION['current-study-deck'] = $statement->fetchAll();
+    $deck = $statement->fetchAll();
     $statement->closeCursor();
 
-    $_SESSION['current-study-card'] = 0;
-    $cardSide = 0;
+}?>
 
-    echo $_SESSION['current-study-deck'][$_SESSION['current-study-card']][0];
-    echo $_SESSION['current-study-deck'][$_SESSION['current-study-card']][1];
-    echo $_SESSION['current-study-deck'][$_SESSION['current-study-card']][2];
-    $starColor = '#d9d8d7';
+<script type="text/javascript">var deck2 = <?php $deck?>;</script>
+<script type="text/javascript" src="study-js.js"></script>
 
-}
-else{
-    $deck_title = "OH no! Something went wrong :(";
-    $_SESSION['current-study-deck'] = array(); //do something more here??
-    $_SESSION['current-study-card'] = 0;
-    $cardSide = 0;
-    $starColor = '#d9d8d7';
-}
-
-?>
-
- <body>
-
+ <body onload="load_data_and_start();">
  <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -99,37 +82,14 @@ else{
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <!-- End of nav bar  -->
 
-  <div id="deck-title"> <?php echo $deck_title; ?></div>
-  <div id="card-area">
-      <div id='current-card' class='card' onclick='flip();'> <?php echo $_SESSION['current-study-deck'][$_SESSION['current-study-card']][$cardSide]?> </i></div>
-      <button id='review-star' class='star' onclick='mark_for_review();' style='color: <?php echo $starColor ?>'><i class='fas fa-star fa-1x'></i></button>
-  </div>
+
+  <div id="deck-title">State Capitals</div>
+  <div id="card-area"></div>
   <div id="nav-buttons">
     <button id="previous-button" onclick="previous();"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
-    <button id="index-display"><?php echo $_SESSION['current-study-card']+1?> out of <?php echo count($_SESSION['current-study-deck']) ?></button>
+    <button id="index-display"></button>
     <button id="next-button" onclick="next();"><i class="fas fa-arrow-circle-right fa-3x"></i></button>
   </div>
  </body>
-
-
-  <?php
-
-    //called when the user clicks the card area
-    function flip(){
-        global $cardSide;
-          if($cardSide == 0){
-            $cardSide = 1;
-            //study();
-          }
-          else {
-            $cardSide = 0;
-            //study();
-          }
-    }
-  ?>
-
-
-
-<script src="study-js.js"></script>
 
 </html>
