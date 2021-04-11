@@ -1,7 +1,7 @@
 # flashy
 CS 4640 -  Interactive Web Application Project
 
-Things used:
+APIs/Resources used:
 * FontAwesome
 * https://www.w3schools.com/bootstrap/bootstrap_jumbotron_header.asp
 * https://www.w3schools.com/cssref/css_colors.asp
