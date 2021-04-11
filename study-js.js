@@ -9,21 +9,28 @@ var currentCard=0; //index of current card
 var deck = []; //will hold all the cards in the deck
 var color; //color of the mark for review star
 
-//loads deck info from the json file
-function loadDeck(){
-  $.getJSON("study-deck.json", function(data) {
-    for(i=0;i<data.study-deck.length;i++){
-      deck[i]=[];
-      deck[i][0]=data.study-deck[i].front;
-      deck[i][1]=data.study-deck[i].back;
-      deck[i][2]=data.study-deck[i].review;
-    }
-  })
-}
+
 // loads data into the deck variable,
 // then starts the study session
 function load_data_and_start(){
-  loadDeck();
+  var ajax = new XMLHttpRequest();
+  var method = "GET";
+  var url = "deck_data.php";
+  var asynch = true;
+
+  ajax.open(method, url, asynch);
+  ajax.send();
+
+  ajax.onreadystatechange = function()
+  {
+    if(this.readyState == 4 && this.status == 200)
+    {
+      //convert JSON back to an array
+      deck = JSON.parse(this.responseText);
+      alert(deck[0][2]);
+    }
+  }
+
   study();
 }
 

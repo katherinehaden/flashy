@@ -33,10 +33,8 @@
     $deck = $statement->fetchAll();
     $statement->closeCursor();
 
-}?>
-
-<script type="text/javascript">var deck2 = <?php $deck?>;</script>
-<script type="text/javascript" src="study-js.js"></script>
+}
+?>
 
  <body onload="load_data_and_start();">
  <!DOCTYPE html>
@@ -83,7 +81,7 @@
 <!-- End of nav bar  -->
 
 
-  <div id="deck-title">State Capitals</div>
+  <div id="deck-title"><?php echo $deck_title ?></div>
   <div id="card-area"></div>
   <div id="nav-buttons">
     <button id="previous-button" onclick="previous();"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
@@ -91,5 +89,7 @@
     <button id="next-button" onclick="next();"><i class="fas fa-arrow-circle-right fa-3x"></i></button>
   </div>
  </body>
+
+  <script src="study-js.js"></script>
 
 </html>
