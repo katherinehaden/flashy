@@ -27,11 +27,10 @@ function load_data_and_start(){
     {
       //convert JSON back to an array
       deck = JSON.parse(this.responseText);
-      alert(deck[0][2]);
+      study();
     }
   }
 
-  study();
 }
 
 
