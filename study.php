@@ -1,7 +1,6 @@
-
- <?php require('connect-db.php'); ?>
+<?php require('connect-db.php'); ?>
  
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
       <meta name="author" content="Katherine Johnson">
