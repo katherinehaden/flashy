@@ -1,4 +1,5 @@
 // Katherine Johnson
+
 //referenced the following tutorial for logic concepts,
 // implemented them using my own javascript
 // http://www.flashbynight.com/tutes/flashcards/
@@ -13,27 +14,30 @@ var color; //color of the mark for review star
 // loads data into the deck variable,
 // then starts the study session
 function load_data_and_start(){
+
+  // AJAX component
+  // referenced this video: https://www.youtube.com/watch?v=crtwSmleWMA
+
   var ajax = new XMLHttpRequest();
   var method = "GET";
-  var url = "deck_data.php";
+  var url = "study-deck-data.php"; //this is the php file that contains the query for obtaining a deck
   var asynch = true;
 
   ajax.open(method, url, asynch);
-  ajax.send();
+  ajax.send(); //send the request
 
-  ajax.onreadystatechange = function()
+  ajax.onreadystatechange = function() //recieve the request
   {
-    if(this.readyState == 4 && this.status == 200)
+    if(this.readyState == 4 && this.status == 200) //if it worked (no errors)...
     {
       //convert JSON back to an array
-      deck = JSON.parse(this.responseText);
-      study();
+      deck = JSON.parse(this.responseText); //convert the retrieved json into an array
+      study(); //call the study function!!
     }
   }
-
 }
 
-
+//loads the cards/card interface
 function study(){
   if(deck[currentCard][2] == 0){ //not marked for review
     color = '#d9d8d7';

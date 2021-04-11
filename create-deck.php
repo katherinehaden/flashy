@@ -65,7 +65,7 @@
       }
       // !!!
 
-      //should probably be checking that all of these are set... ?
+      //might want to check that these are set...
       $username = $_SESSION['username'];
       $deck_title = $_SESSION['new-deck-name'];
 
@@ -73,10 +73,8 @@
                     VALUES(:u, :dt)";
 
       $statement = $db->prepare($query);
-
       $statement->bindValue(':u', $username);
       $statement->bindValue(':dt', $deck_title);
-
       $statement->execute();
       $statement->closeCursor();
 

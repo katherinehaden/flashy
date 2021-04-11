@@ -110,7 +110,6 @@
         $statement->bindValue(':f', $front);
         $statement->bindValue(':b', $back);
         $statement->bindValue(':r', $review);
-
         $statement->execute();
         $statement->closeCursor();
 
@@ -131,6 +130,5 @@
 ?>
 
 </body>
-
 
 </html>

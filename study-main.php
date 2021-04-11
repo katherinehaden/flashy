@@ -51,7 +51,6 @@
     <br>
 
     <?php
-
     function getMyDecks()
     {
         global $db;
@@ -63,19 +62,13 @@
         }
         // !!!
 
-        //should probably be checking that all of these are set... ?
         $username = $_SESSION['username'];
 
         $query = "SELECT deck.deck_title FROM deck WHERE deck.username = :u";
-
         $statement = $db->prepare($query);
-
         $statement->bindValue(':u', $username);
-
         $statement->execute();
-
         $_SESSION['my-decks'] = $statement->fetchAll();
-
         $statement->closeCursor();
 
     }
@@ -84,9 +77,7 @@
     {
         unset($_SESSION['my-decks']);
     }
-
     getMyDecks();
-
     ?>
 
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="get">

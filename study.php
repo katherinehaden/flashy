@@ -7,33 +7,12 @@
   <link href="style/flashy-css.css" rel="stylesheet" type="text/css"/>
  </head>
 
-<?php session_start(); ?>
-<?php if(isset($_COOKIE['study-deck']))
-{
-    global $db;
+<?php session_start();
 
-    // WILL BE DELETED ONCE MAIN PAGE AND LOGIN IN ARE DONE!!
-    if(!isset($_SESSION['username']))
-    {
-        $_SESSION['username'] = "test_user";
-    }
-    // !!!
-
-    //should probably be checking that all of these are set... ?
-    $username = $_SESSION['username'];
-    $deck_title = $_COOKIE['study-deck'];
-
-    $query = "SELECT front, back, review FROM card 
-                WHERE username = :u AND deck_title = :dt";
-
-    $statement = $db->prepare($query);
-    $statement->bindValue(':u', $username);
-    $statement->bindValue(':dt', $deck_title);
-    $statement->execute();
-    $deck = $statement->fetchAll();
-    $statement->closeCursor();
-
-}
+if(isset($_COOKIE['study-deck']))
+    $study_deck_title = $_COOKIE['study-deck'];
+else
+    $study_deck_title = 'No deck chosen :(';
 ?>
 
  <body onload="load_data_and_start();">
@@ -81,7 +60,7 @@
 <!-- End of nav bar  -->
 
 
-  <div id="deck-title"><?php echo $deck_title ?></div>
+  <div id="deck-title"><?php echo $study_deck_title ?></div>
   <div id="card-area"></div>
   <div id="nav-buttons">
     <button id="previous-button" onclick="previous();"><i class="fas fa-arrow-circle-left fa-3x"></i></button>
