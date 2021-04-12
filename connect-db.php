@@ -1,13 +1,12 @@
 <?php
 // hostname
-$hostname = 'localhost:3306';
 
-// database name
-$dbname = 'flashy';
+// [Spring 2021] connecting to DB on CS server
+ $hostname = 'usersrv01.cs.virginia.edu';
+ $dbname = 'eal8hs';
+ $username = 'eal8hs';
+ $password = 'Fl@shy2021';
 
-// database credentials
-$username = 'username';
-$password = 'password';
 
 // DSN (Data Source Name) specifies the host computer for the MySQL database
 // and the name of the database. If the MySQL database is running on the same server

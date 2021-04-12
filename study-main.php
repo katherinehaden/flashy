@@ -17,7 +17,7 @@
 <?php session_start(); ?>
 
 <div class="container">
-<h1> What would you like to study?</h1>
+<h1> What would you like to study <?php if (isset($_SESSION['user'])) echo $_SESSION['user'] ?>?</h1>
     <!---- referenced https://getbootstrap.com/docs/4.4/components/card/ --->
     <br>
 
