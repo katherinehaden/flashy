@@ -1,0 +1,5 @@
+# Use the PHP 7.3 runtime by replacing "php72" below with "php73"
+runtime: php73
+
+# Defaults to "serve login.php"
+entrypoint: serve login.php
