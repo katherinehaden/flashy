@@ -26,14 +26,7 @@
     {
         global $db;
 
-        // WILL BE DELETED ONCE MAIN PAGE AND LOGIN IN ARE DONE!!
-        if(!isset($_SESSION['username']))
-        {
-            $_SESSION['username'] = "test_user";
-        }
-        // !!!
-
-        $username = $_SESSION['username'];
+        $username = $_SESSION['user'];
 
         $query = "SELECT deck.deck_title FROM deck WHERE deck.username = :u";
         $statement = $db->prepare($query);

@@ -9,15 +9,8 @@ if(isset($_COOKIE['study-deck']))
 {
     global $db;
 
-    // WILL BE DELETED ONCE MAIN PAGE AND LOGIN IN ARE DONE!!
-    if(!isset($_SESSION['username']))
-    {
-        $_SESSION['username'] = "test_user";
-    }
-    // !!!
-
     //might want to check that all of these are set...
-    $username = $_SESSION['username'];
+    $username = $_SESSION['user'];
     $deck_title = $_COOKIE['study-deck'];
 
     $query = "SELECT front, back, review FROM card WHERE username = :u AND deck_title = :dt";

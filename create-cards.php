@@ -58,15 +58,9 @@
     {
         global $db;
 
-        // WILL BE DELETED ONCE MAIN PAGE AND LOGIN IN ARE DONE!!
-        if(!isset($_SESSION['username']))
-        {
-            $_SESSION['username'] = "test_user";
-        }
-        // !!!
 
         //should probably be checking that all of these are set... ?
-        $username = $_SESSION['username'];
+        $username = $_SESSION['user'];
         $deck_title = $_SESSION['new-deck-name'];
         //card_id (will increment automatically)
         $front = $_SESSION['last-front-added'];

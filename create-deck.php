@@ -31,15 +31,8 @@
   {
       global $db;
 
-      // WILL BE DELETED ONCE MAIN PAGE AND LOGIN IN ARE DONE!!
-      if(!isset($_SESSION['username']))
-      {
-          $_SESSION['username'] = "test_user";
-      }
-      // !!!
-
       //might want to check that these are set...
-      $username = $_SESSION['username'];
+      $username = $_SESSION['user'];
       $deck_title = $_SESSION['new-deck-name'];
 
       $query = "INSERT INTO deck (username, deck_title)
