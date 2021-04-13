@@ -27,7 +27,7 @@
 
 
 <div class="container">
-    <form id="myform" action="login.php" method="post">
+    <form id="myform"  method="post">
 
       <label>Username: </label>
         <input type="text" name="username" id="username" class="form-control" autofocus required />
@@ -41,7 +41,7 @@
       <input type="submit" value="Submit" class="btn btn-secondary" value="Sign in"
         />
     </form>
-</div>
+
 
 <?php
 require('connect-db.php');
@@ -78,7 +78,7 @@ function authenticate()
       foreach($results as $result){
         $db_username = $result['username'];
         $db_email = $result['email'];
-        $hash = $result['password'];
+        $db_pwd = $result['password'];// Did not hash because this messed up cs webserver deployment
         $numresults = $numresults +1;
         }
 
@@ -89,10 +89,10 @@ function authenticate()
         {
             echo 'An account already exists with this email';
         }
-        else if (password_verify($pwd, $hash))
+        else if ($db_pwd == $pwd)
         {
             $_SESSION['user']= $username;
-            header("Location: ".$mainpage);
+            header("Location: study-main.php");
         }
         else
         {
@@ -123,22 +123,21 @@ function authenticate()
         }
         else
         {
-            $hash = password_hash($pwd, PASSWORD_BCRYPT);
+            //$hash = password_hash($pwd, PASSWORD_BCRYPT); this messed up cs webserver deployment
             $query3 = "INSERT INTO user (username, email, password) VALUES (:username, :email, :password)";
             $statement = $db->prepare($query3);
             $statement->bindValue(':username', $username);
             $statement->bindValue(':email', $eml);
-            $statement->bindValue(':password', $hash);
+            $statement->bindValue(':password', $pwd);
             $statement->execute();
 
             $statement->closeCursor();
             $_SESSION['user']= $username;
-            header("Location: ".$mainpage);
+            header("Location: study-main.php");
         }
       }
    }
 }
-$mainpage = "study-main.php";
 authenticate();
 ?>
 <script>
@@ -163,7 +162,8 @@ authenticate();
 
 
 </script>
-    </div>
+</div>
+</div>
 
 
 </body>
