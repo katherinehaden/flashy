@@ -65,6 +65,58 @@
         }
     ?>
 
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="get">
+      <input type="submit" name="btnaction" value="Delete Deck" class="btn btn-light" /> <select name="deck-name" id="deck_titles">
+        <?php
+            foreach($_SESSION['my-decks'] as $i => $result)
+            {
+                echo "<option  value=" . $result['deck_title'] . "' >";
+                echo $result['deck_title'];
+                echo "</option>";
+            }
+        ?>
+    </select>
+    </form>
+
+    <?php
+    if (isset($_GET['btnaction']))
+    {
+       try
+       {
+          switch ($_GET['btnaction'])
+          {
+             case 'Delete Deck': deleteData();  break;
+             //Will add button to update and add decks later
+          }
+       }
+       catch (Exception $e)       // handle any type of exception
+       {
+          $error_message = $e->getMessage();
+          echo "<p>Error message: $error_message </p>";
+       }
+    }
+    ?>
+    <?php
+    function deleteData()
+    {
+         global $db;
+         $deck_title = htmlspecialchars($_GET['deck-name']);
+         $deck_title = substr($deck_title, 0, -1); //Looked up this method online to remove ' from end of deck title
+         $username = $_SESSION['user'];
+
+
+         $query = "DELETE FROM deck WHERE deck_title = :deck_title and username = :username";
+         $statement = $db->prepare($query);
+         $statement->bindValue(':deck_title', $deck_title);
+         $statement->bindValue(':username', $username);
+
+
+          $statement->execute();
+
+         $statement->closeCursor();
+         header("Location: ".$_SERVER['PHP_SELF']);
+    }
+    ?>
 </div>
 </body>
 

@@ -8,6 +8,7 @@ APIs/Resources used:
 * https://www.codexpedia.com/javascript/submitting-html-form-without-reload-the-page/#:~:text=Use%20jQuery's%20submit%20event%20to,prevent%20the%20page%20to%20reload.
 * https://www.javascripttutorial.net/javascript-anonymous-functions/
 * https://bootstrapshuffle.com/classes/sizing/w-100
+* https://www.tutsmake.com/php-functions-remove-last-character-from-string-in-php/
 
 Things to maybe add:
 * update mark for review changes in the database as users study
