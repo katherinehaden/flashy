@@ -138,13 +138,12 @@ function authenticate()
       }
    }
 }
-// $mainpage = "form.php";       // handle form data on a separated page
 $mainpage = "study-main.php";
 authenticate();
 ?>
 <script>
 
-//<!-- used some in class ecamples like bind-event-with-param-->
+//<!-- used some in class examples like bind-event-with-param-->
    var email = document.getElementById("eml");
 
    function checkEmail() {
