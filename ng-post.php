@@ -1,5 +1,6 @@
 
 <?php
+//Elena Lensink
 //header('Access-Control-Allow-Origin: http://localhost:4200');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding');
@@ -24,7 +25,7 @@ foreach($request as $k => $v)
 
 $current_date = date("Y-m-d");
 
-echo json_encode(['content'=>$sqlentry, 'response_on'=>$current_date]);
+echo json_encode(['content'=>$data, 'response_on'=>$current_date]);
 require('connect-db.php');
     $query = "INSERT INTO feedback (rating, feedback) VALUES (:rating, :feedback)";
 

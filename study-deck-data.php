@@ -1,4 +1,5 @@
 <?php
+//Katherine Johnson
 
 session_start();
 require('connect-db.php');

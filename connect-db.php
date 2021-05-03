@@ -1,4 +1,5 @@
 <?php
+//Elena Lensink
 // hostname
 
 // [Spring 2021] connecting to DB on CS server
