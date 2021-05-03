@@ -24,7 +24,7 @@ foreach($request as $k => $v)
 
 $current_date = date("Y-m-d");
 
-echo json_encode(['content'=>$sqlentry, 'response_on'=>$current_date]);
+echo json_encode(['content'=>$data, 'response_on'=>$current_date]);
 require('connect-db.php');
     $query = "INSERT INTO feedback (rating, feedback) VALUES (:rating, :feedback)";
 
